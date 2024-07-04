@@ -6,5 +6,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playground — Complete Intro to Vue 3</title>
   </head>
-  <body></body>
+  <body>
+    <h1>hello</h1>
+    <div id="app">
+      <h1>Counter</h1>
+      <p>{{ count }}</p>
+      <button v-on:click="incrementCount">Increment count</button>
+      <h1>{{ incrementAmount }}</h1>
+      <div>
+        <label for="incrementAmount">Increment by: </label>
+        <input type="number" 
+        v-model.number="incrementAmount"
+        /> 
+        <!-- 
+        v-on: === @
+        v-bind: === :
+        v-model.number > .number > modifier to directive
+        v-bind:value="incrementAmount" 
+        v-on:input="changeIncrementAmount"
+        -->
+
+      </div>
+      <hr>
+
+      <p v-if="message.length % 2 === 0"> Even: {{ message }} </p>
+      <p v-else> Odd: {{ message }} </p>
+      <ul>
+        <li v-for="number in listOfNumbers">{{ number }}</li>
+      </ul>
+      <!-- Vue.js directives are special tokens in the markup that tell the library 
+      to do something to a DOM element. They are prefixed with v- to indicate that 
+      they are special attributes provided by Vue. -->
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue // Vue.crateApp 
+      // a destructuring assignment that extracts the createApp method from the Vue object 
+      // and assigns it to a constant named createApp
+
+      const app = createApp({
+        data() {
+          return {
+            count: 10,
+            incrementAmount: 8,
+            message: "Hello it works!",
+            listOfNumbers: [1, 2, 3, 4, 5]
+          }
+        },
+        methods: {
+          incrementCount(){
+            this.count += this.incrementAmount
+          },
+          changeIncrementAmount(event){
+            this.incrementAmount = Number(event.target.value)
+          }
+        }
+      })
+
+      app.mount('#app')
+    </script>
+  </body>
 </html>
+
+<!-- Vue.createApp({
+  data: () => ({
+    
+  })
+}).mount('#app') -->
+
+
+<!-- const { createApp } = Vue // Vue.crateApp 
+
+const app = createApp({
+  data() {
+    return {
+
+    }
+  }
+}) 
+  
+app.mount('#app') -->
